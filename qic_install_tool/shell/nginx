@@ -1,0 +1,56 @@
+#! /bin/bash
+
+# chkconfig: 35 85 15 
+# description: Nginx is an HTTP(S) server, HTTP(S) reverse
+# 2013-01-09 add by liujianli
+set -e
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+DESC="nginx daemon"
+NAME=nginx
+DAEMON=/usr/local/nginx/sbin/$NAME
+SCRIPTNAME=/etc/init.d/$NAME
+
+test -x $DAEMON || exit 0
+
+d_start(){
+    $DAEMON || echo -n " 服务运行中，请先停止服务"
+}
+
+d_stop() {
+    $DAEMON -s quit || echo -n " 没有检测到服务运行，停止失败"
+}
+
+d_reload() {
+    $DAEMON -s reload || echo -n " counld not reload"
+}
+
+case "$1" in
+start)
+    echo -n "Starting $DESC:$NAME"
+    d_start
+    echo "."
+;;
+stop)
+    echo -n "Stopping $DESC:$NAME"
+    d_stop
+    echo "."
+;;
+reload)
+    echo -n "Reloading $DESC configuration..."
+    d_reload
+    echo "reloaded."
+;;
+restart)
+    echo -n "Restarting $DESC: $NAME"
+    d_stop
+    sleep 2
+    d_start
+    echo "."
+;;
+*)
+    echo "Usage: $SCRIPTNAME {start|stop|restart|reload}" >&2
+    exit 3
+;;
+esac
+
+exit 0

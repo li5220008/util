@@ -1,0 +1,39 @@
+#!/bin/sh
+#chkconfig: 345 91 9
+#用于监控数据库变化 (dbrecordchange)
+
+. /etc/rc.d/init.d/functions
+
+function start()
+{
+  /var/data/sh/startReplicator.sh 
+}
+function stop()
+{
+  /var/data/sh/stopReplicator.sh
+}
+
+function status()
+{
+  /var/data/sh/statusReplicator.sh
+}
+
+case $1 in
+'start')
+        start
+;;
+'stop')
+        stop
+;;
+'restart')
+        stop
+		start
+;;
+'status')
+        status
+;;
+*)
+        echo "usage: service dbrecordchange [start|stop|status|restart]"
+;;
+esac
+exit 0
