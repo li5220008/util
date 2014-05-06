@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.gtafe.dao.FeeRateMapper">
+
+    <select id="selectFeeRateByID" parameterType="String" resultType="FeeRate">
+        select * from piffrt where FRT_KEY = #{FRT_KEY}
+    </select> 
+  
+ <!-- 为了返回list 类型而定义的returnMap -->
+    <resultMap type="FeeRate" id="resultListFeeRate">
+        <id column="FRT_KEY" property="FRT_KEY" />
+        <result column="CUR_CDE" property="CUR_CDE" />
+        <result column="FRT_CDEs" property="FRT_CDEs" />
+        <result column="FRT_KD1" property="FRT_KD1" />
+        <result column="FRT_KD2" property="FRT_KD2" />
+        <result column="EFF_DAT" property="EFF_DAT" />
+        <result column="ERT_CDE" property="ERT_CDE" />
+        <result column="ERT_NAM" property="ERT_NAM" />
+        <result column="DOC_CDE" property="DOC_CDE" />
+        <result column="DOC_NAM" property="DOC_NAM" />
+        <result column="FRT_SPH" property="FRT_SPH" />
+        <result column="FRT_SPL" property="FRT_SPL" />
+        <result column="SPR_FLG" property="SPR_FLG" />
+        <result column="MAL_FEE" property="MAL_FEE" />
+        <result column="COM_FEE" property="COM_FEE" />
+        <result column="FEE_RAT" property="FEE_RAT" />
+        <result column="HIG_LIM" property="HIG_LIM" />
+        <result column="LOW_LIM" property="LOW_LIM" />
+        <result column="FEECYC" property="FEECYC" />
+        <result column="FEESDE" property="FEESDE" />
+        <result column="FEE_ITM" property="FEE_ITM" />
+        <result column="FRT_FLG" property="FRT_FLG" />
+        <result column="CMT_FLG" property="CMT_FLG" />
+        <result column="FEE_TPY" property="FEE_TPY" />
+        <result column="CMT_TPY" property="CMT_TPY" />
+        <result column="RSV_FLG" property="RSV_FLG" />
+        <result column="CRETLR" property="CRETLR" />
+        <result column="CREDAT" property="CREDAT" />
+        <result column="UPT_DAT" property="UPT_DAT" />
+        <result column="UPT_TLR" property="UPT_TLR" />
+        <result column="REC_STS" property="REC_STS" />
+       
+    </resultMap>  
+    <!-- 返回list 的select 语句，注意 resultMap 的值是指向前面定义好的 -->
+  
+    
+    <select id="findAll"  resultMap="resultListFeeRate">
+        select * from piffrt
+    </select>
+   
+ 
+    
+    <!--执行增加操作的SQL语句。id和parameterType分别与IUserOperation接口中的addUser方法的名字和  
+       参数类型一致。以#{name}的形式引用User参数 的name属性，MyBatis将使用反射读取User参数  
+        的此属性。#{name}中name大小写敏感。引用其他  
+       的gender等属性与此一致。seGeneratedKeys设置  
+       为"true"表明要MyBatis获取由数据库自动生成的主  
+       键；keyProperty="id"指定把获取到的主键值注入  
+       到Student的id属性?charset=cp936
+               useGeneratedKeys="true" keyProperty="uid"
+       --> 
+       
+
+      <delete id="deleteFeeRate" parameterType="String">
+        delete from pifxrt where FRT_KEY=#{XRT_KEY}
+    </delete> 
+
+</mapper>

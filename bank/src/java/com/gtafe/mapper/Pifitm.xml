@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.gtafe.dao.PifitmMapper">
+
+     <!-- 为了返回list 类型而定义的returnMap -->
+    <resultMap type="Pifitm" id="resultListPifitm">
+        <id column="itm_num" property="itm_num" />
+        <id column="itm_nam" property="itm_nam" />
+        <id column="itm_typ" property="itm_typ" />
+        <id column="itm_atr" property="itm_atr" />
+        <id column="itm_cla" property="itm_cla" />  
+    </resultMap>  
+    <!-- 返回list 的select 语句，注意 resultMap 的值是指向前面定义好的 -->
+    <select id="selectAllPifitm"  resultMap="resultListPifitm">
+         select ITM_NUM,ITM_NAM,ITM_TYP,ITM_ATR,ITM_CLA from PIFITM 
+    </select>
+    
+    <select id="getPifitm" parameterType="String" resultType="Pifitm" >
+         select * from PIFITM where ITM_NUM=#{itm_num}
+    </select>
+    
+    <delete id="deletePifitm" parameterType="String">
+         delete from PIFITM  where ITM_NUM=#{itm_num}
+    </delete>
+    
+    <update id="updatePifitm" parameterType="Pifitm">
+         update PIFITM set 
+         ITM_NUM=#{itm_num,jdbcType=VARCHAR},ITM_NAM=#{itm_nam,jdbcType=VARCHAR},ITM_TYP=#{itm_typ,jdbcType=VARCHAR},
+         ITM_ATR=#{itm_atr,jdbcType=VARCHAR},ITM_CLA=#{itm_cla,jdbcType=VARCHAR},BEL_ITM=#{bel_itm,jdbcType=VARCHAR},
+         PBC_ITM=#{pbc_itm,jdbcType=VARCHAR},SUB_FLG=#{sub_flg,jdbcType=VARCHAR},DTL_FLG=#{dtl_flg,jdbcType=VARCHAR},
+         BAL_DIR=#{bal_dir,jdbcType=VARCHAR},USR_FLG=#{usr_flg,jdbcType=VARCHAR},ERY_AUT=#{ery_aut,jdbcType=VARCHAR},
+         REQ_AUT=#{req_aut,jdbcType=VARCHAR},REV_FLG=#{rev_flg,jdbcType=VARCHAR},REV_TYP=#{rev_typ,jdbcType=VARCHAR},
+         REV_TRM=#{rev_trm,jdbcType=NUMERIC},STA_CDE=#{sta_cde,jdbcType=VARCHAR},INT_KND=#{int_knd,jdbcType=VARCHAR},
+         BLR_FLG=#{blr_flg,jdbcType=VARCHAR},ZBL_FLG=#{zbl_flg,jdbcType=VARCHAR},ACT_FLG=#{act_flg,jdbcType=VARCHAR},
+         ENY_FLG=#{eny_flg,jdbcType=VARCHAR},INT_FLG=#{int_flg,jdbcType=VARCHAR},TAX_FLG=#{tax_flg,jdbcType=VARCHAR},
+         OPS_ITM=#{ops_itm,jdbcType=VARCHAR},INT_EXP=#{int_exp,jdbcType=VARCHAR},INT_INC=#{int_inc,jdbcType=VARCHAR},
+         INT_DAC=#{int_dac,jdbcType=VARCHAR},INT_CAC=#{int_cac,jdbcType=VARCHAR},GLE_CDE=#{gle_cde,jdbcType=VARCHAR},
+         PNL_CDE=#{pnl_cde,jdbcType=VARCHAR},UPT_DAT=#{upt_dat,jdbcType=DATE},UPT_TLR=#{upt_tlr,jdbcType=VARCHAR},
+         ITM_STS=#{itm_sts,jdbcType=VARCHAR},REC_STS=#{rec_sts,jdbcType=VARCHAR}
+         where ITM_NUM=#{itm_num,jdbcType=VARCHAR}
+    </update>
+       
+    <insert id="insertPifitm" parameterType="Pifitm">
+        insert into PIFITM(ITM_NUM,ITM_NAM,ITM_TYP,ITM_ATR,ITM_CLA,BEL_ITM,
+                           PBC_ITM,SUB_FLG,DTL_FLG,BAL_DIR,USR_FLG,ERY_AUT,
+                           REQ_AUT,REV_FLG,REV_TYP,REV_TRM,STA_CDE,INT_KND,
+                           BLR_FLG,ZBL_FLG,ACT_FLG,ENY_FLG,INT_FLG,TAX_FLG,
+                           OPS_ITM,INT_EXP,INT_INC,INT_DAC,INT_CAC,GLE_CDE,
+                           PNL_CDE,UPT_DAT,UPT_TLR,ITM_STS,REC_STS
+        ) values (#{itm_num,jdbcType=VARCHAR},#{itm_nam,jdbcType=VARCHAR},#{itm_typ,jdbcType=VARCHAR},
+                  #{itm_atr,jdbcType=VARCHAR},#{itm_cla,jdbcType=VARCHAR},#{bel_itm,jdbcType=VARCHAR},
+                  #{pbc_itm,jdbcType=VARCHAR},#{sub_flg,jdbcType=VARCHAR},#{dtl_flg,jdbcType=VARCHAR},
+                  #{bal_dir,jdbcType=VARCHAR},#{usr_flg,jdbcType=VARCHAR},#{ery_aut,jdbcType=VARCHAR},
+                  #{req_aut,jdbcType=VARCHAR},#{rev_flg,jdbcType=VARCHAR},#{rev_typ,jdbcType=VARCHAR},
+                  #{rev_trm,jdbcType=NUMERIC},#{sta_cde,jdbcType=VARCHAR},#{int_knd,jdbcType=VARCHAR},
+                  #{blr_flg,jdbcType=VARCHAR},#{zbl_flg,jdbcType=VARCHAR},#{act_flg,jdbcType=VARCHAR},
+                  #{eny_flg,jdbcType=VARCHAR},#{int_flg,jdbcType=VARCHAR},#{tax_flg,jdbcType=VARCHAR},
+                  #{ops_itm,jdbcType=VARCHAR},#{int_exp,jdbcType=VARCHAR},#{int_inc,jdbcType=VARCHAR},
+                  #{int_dac,jdbcType=VARCHAR},#{int_cac,jdbcType=VARCHAR},#{gle_cde,jdbcType=VARCHAR},
+                  #{pnl_cde,jdbcType=VARCHAR},#{upt_dat,jdbcType=DATE},#{upt_tlr,jdbcType=VARCHAR},
+                  #{itm_sts,jdbcType=VARCHAR},#{rec_sts,jdbcType=VARCHAR}                
+                  )
+    </insert>
+
+</mapper>

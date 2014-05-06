@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.gtafe.dao.PifirtMapper">
+
+    <!-- 根据ID搜索一条记录 -->
+    <select id="selectByID" parameterType="string" resultType="PIFIRT">
+        select * from PIFIRT as a where a.IRT_KEY = #{id} and a.REC_STS != 'I'
+    </select>
+
+    <!-- 获取全部 -->
+    <select id="fetchAll" resultMap="resultListPIFIRT">
+        select * FROM PIFIRT as a where a.REC_STS != 'I'
+    </select>
+
+    <!-- 为了返回list 类型而定义的returnMap -->
+    <resultMap type="PIFIRT" id="resultListPIFIRT"></resultMap>
+
+    <!-- 添加一条记录 -->
+    <insert id="add" parameterType="PIFIRT">
+        insert into PIFIRT (
+           IRT_KEY
+          ,cur_cde
+          ,irt_cde
+          ,irt_kd1
+          ,irt_kd2
+          ,eff_dat
+          ,irt_nam
+          ,cur_flg
+          ,mod_flg
+          ,irt_val
+          ,irt_sph
+          ,irt_spl
+          ,spr_flg
+          ,cdr_flg
+          ,irt_trm
+          ,trm_unt
+          ,cre_tlr
+          ,cre_dat
+          ,upt_dat
+          ,upt_tlr
+          ,REC_STS
+        ) VALUES (
+           #{irt_key}  -- IRT_KEY - IN char(13)
+          ,#{cur_cde} -- cur_cde - IN char(2)
+          ,#{irt_cde} -- irt_cde - IN char(3)
+          ,#{irt_kd1} -- irt_kd1 - IN char(1)
+          ,#{irt_kd2} -- irt_kd2 - IN char(2)
+          ,#{eff_dat} -- eff_dat - IN char(8)
+          ,#{irt_nam} -- irt_nam - IN char(24)
+          ,#{cur_flg} -- cur_flg - IN char(1)
+          ,#{mod_flg} -- mod_flg - IN char(1)
+          ,#{irt_val} -- irt_val - IN decimal(9, 6)
+          ,#{irt_sph} -- irt_sph - IN decimal(4, 3)
+          ,#{irt_spl} -- irt_spl - IN decimal(4, 3)
+          ,#{spr_flg} -- spr_flg - IN char(1)
+          ,#{cdr_flg} -- cdr_flg - IN char(1)
+          ,#{irt_trm} -- irt_trm - IN numeric(3, 0)
+          ,#{trm_unt} -- trm_unt - IN char(1)
+          ,#{cre_tlr} -- cre_tlr - IN char(6)
+          ,#{cre_dat} -- cre_dat - IN smalldatetime
+          ,#{upt_dat} -- upt_dat - IN smalldatetime
+          ,#{upt_tlr} -- upt_tlr - IN char(6)
+          ,#{rec_sts} -- REC_STS - IN char(1)
+        )
+    </insert>
+
+    <!-- 更新一条记录 -->
+    <update id="update" parameterType="PIFIRT" >
+        update PIFIRT SET
+           cur_cde = #{cur_cde} -- char(2)
+          ,irt_cde = #{irt_cde} -- char(3)
+          ,irt_kd1 = #{irt_kd1} -- char(1)
+          ,irt_kd2 = #{irt_kd2} -- char(2)
+          ,eff_dat = #{eff_dat} -- char(8)
+          ,irt_nam = #{irt_nam} -- char(24)
+          ,cur_flg = #{cur_flg} -- char(1)
+          ,mod_flg = #{mod_flg} -- char(1)
+          ,irt_val = #{irt_val} -- decimal(9, 6)
+          ,irt_sph = #{irt_sph} -- decimal(4, 3)
+          ,irt_spl = #{irt_spl} -- decimal(4, 3)
+          ,spr_flg = #{spr_flg} -- char(1)
+          ,cdr_flg = #{cdr_flg} -- char(1)
+          ,irt_trm = #{irt_trm} -- numeric(3, 0)
+          ,trm_unt = #{trm_unt} -- char(1)
+          ,cre_tlr = #{cre_tlr} -- char(6)
+          ,cre_dat = #{cre_dat} -- smalldatetime
+          ,upt_dat = #{upt_dat} -- smalldatetime
+          ,upt_tlr = #{upt_tlr} -- char(6)
+          ,REC_STS = #{rec_sts} -- char(1)
+        WHERE IRT_KEY = #{irt_key} -- char(13)
+    </update>
+
+    <!-- 软删除一条记录 -->
+    <update id="softDeleteById" parameterType="String">
+        update PIFIRT SET a.REC_STS = 'I' where IRT_KEY=#{id}
+    </update>
+</mapper>

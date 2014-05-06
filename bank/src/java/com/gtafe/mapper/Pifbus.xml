@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.gtafe.dao.PifbusMapper">
+
+    <!-- 根据ID搜索一条记录 -->
+    <select id="selectByID" parameterType="string" resultType="PIFBUS">
+        select * from PIFBUS as a where a.BUS_CDE = #{id} and a.REC_STS != 'I'
+    </select>
+
+    <!-- 获取全部 -->
+    <select id="fetchAll" resultMap="resultListPIFBUS">
+        select * FROM PIFBUS as a where a.REC_STS != 'I'
+    </select>
+
+    <!-- 为了返回list 类型而定义的returnMap -->
+    <resultMap type="PIFBUS" id="resultListPIFBUS"></resultMap>
+
+    <!-- 添加一条记录 -->
+    <insert id="add" parameterType="PIFBUS">
+        insert into PIFBUS (
+           BUS_CDE
+           --APP_CDE = 'ab' -- char(2) 外键依赖
+          ,BUS_ITM
+          ,BUS_APP
+          ,BUS_NAM
+          ,BUS_SNM
+          ,UPT_DAT
+          ,UPT_TLR
+          ,REC_STS
+          ,BUS_KD1
+          ,BUS_KD2
+        ) VALUES (
+           #{bus_cde}  -- BUS_CDE - IN char(3)
+          ,#{bus_cde} -- BUS_ITM - IN char(4)
+          ,#{bus_app} -- bus_app - in char(2)
+          ,#{bus_nam} -- bus_nam - in char(34)
+          ,#{bus_snm} -- bus_snm - in char(6)
+          ,#{upt_dat} -- upt_dat - in date
+          ,#{upt_tlr} -- upt_tlr - in char(6)
+          ,#{rec_sts} -- rec_sts - in char(1)
+          ,#{bus_kd1} -- bus_kd1 - in char(1)
+          ,#{bus_kd2} -- BUS_KD2 - IN numeric(2, 0)
+        )
+    </insert>
+
+    <!-- 更新一条记录 -->
+    <update id="update" parameterType="PIFBUS" >
+        update PIFBUS SET
+           --APP_CDE = ab -- char(2) 外键依赖
+           BUS_ITM = #{bus_itm} -- char(4)
+          ,BUS_APP = #{bus_app} -- char(2)
+          ,BUS_NAM = #{bus_nam} -- char(34)
+          ,BUS_SNM = #{bus_snm} -- char(6)
+          ,UPT_DAT = #{upt_dat} -- date
+          ,UPT_TLR = #{upt_tlr} -- char(6)
+          ,REC_STS = #{rec_sts} -- char(1)
+          ,BUS_KD1 = #{bus_kd1} -- char(1)
+          ,BUS_KD2 = #{bus_kd2} -- numeric(2, 0)
+      WHERE BUS_CDE = #{bus_cde} -- char(3)
+    </update>
+
+    <!-- 软删除一条记录 -->
+    <update id="softDeleteById" parameterType="String">
+        update PIFBUS SET a.REC_STS = 'I' where BUS_CDE=#{id}
+    </update>
+</mapper>

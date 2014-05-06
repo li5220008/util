@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.gtafe.dao.PifccyMapper">
+
+     <!-- 为了返回list 类型而定义的returnMap -->
+    <resultMap type="Pifccy" id="resultListPifccy">
+        <id column="cur_cde" property="cur_cde" />
+        <id column="cur_nmc" property="cur_nmc" />
+        <id column="cur_nme" property="cur_nme" />
+        <id column="cur_nam" property="cur_nam" />
+        <id column="dom_cde" property="dom_cde" />
+        <id column="int_cur" property="int_cur" />
+        <id column="dec_pos" property="dec_pos" />
+        <id column="ccy_knd" property="ccy_knd" />
+        <id column="clr_flg" property="clr_flg" />
+        <id column="ttc_flg" property="ttc_flg" />
+        <id column="csh_flg" property="csh_flg" />
+        <id column="cnt_flg" property="cnt_flg" />
+        <id column="rnd_flg" property="rnd_flg" />
+        <id column="exc_flg" property="exc_flg" />
+        <id column="cur_unt" property="cur_unt" />
+        <id column="prc_flg" property="prc_flg" />
+        <id column="exc_unt" property="exc_unt" />
+        <id column="int_per" property="int_per" />
+        <id column="hol_flg" property="hol_flg" />
+        <id column="cur_sts" property="cur_sts" />
+        <id column="eff_dat" property="eff_dat" />
+        <id column="exp_dat" property="exp_dat" />   
+        <id column="spe_flg" property="spe_flg" /> 
+        <id column="upt_dat" property="upt_dat" /> 
+        <id column="upt_tlr" property="upt_tlr" />  
+        <id column="rec_sts" property="rec_sts" />   
+    </resultMap>  
+    <!-- 返回list 的select 语句，注意 resultMap 的值是指向前面定义好的 -->
+    <select id="selectAllPifccy"  resultMap="resultListPifccy">
+         select * from PIFCCY 
+    </select>
+    
+    <select id="getPifccy" parameterType="String" resultType="Pifccy" >
+         select * from PIFCCY where CUR_CDE=#{cur_cde}
+    </select>
+    
+    <delete id="deletePifccy" parameterType="String">
+         delete from PIFCCY  where CUR_CDE=#{cur_cde}
+    </delete>
+    
+    <update id="updatePifccy" parameterType="Pifccy">
+         update PIFCCY set 
+         CUR_NMC=#{cur_nmc,jdbcType=VARCHAR},CUR_NME=#{cur_nme,jdbcType=VARCHAR},
+         CNT_NAM=#{cnt_nam,jdbcType=VARCHAR},DOM_CDE=#{dom_cde,jdbcType=VARCHAR},INT_CUR=#{int_cur,jdbcType=VARCHAR},
+         DEC_POS=#{dec_pos,jdbcType=NUMERIC},CCY_KND=#{ccy_knd,jdbcType= CHAR},CLR_FLG=#{clr_flg,jdbcType= CHAR},
+         TTC_FLG=#{ttc_flg,jdbcType= CHAR},CSH_FLG=#{csh_flg,jdbcType= CHAR},CNT_FLG=#{cnt_flg,jdbcType= CHAR},
+         RND_FLG=#{rnd_flg,jdbcType= CHAR},EXC_FLG=#{exc_flg,jdbcType= CHAR},CUR_UNT=#{cur_unt,jdbcType=DECIMAL},
+         PRC_FLG=#{prc_flg,jdbcType= CHAR},EXC_UNT=#{exc_unt,jdbcType= NUMERIC},INT_PER=#{int_per,jdbcType=NUMERIC},
+         HOL_FLG=#{hol_flg,jdbcType= CHAR},CUR_STS=#{cur_sts,jdbcType= CHAR},EFF_DAT=#{eff_dat,jdbcType=DATE},
+         EXP_DAT=#{exp_dat,jdbcType=DATE},SPE_FLG=#{spe_flg,jdbcType=VARCHAR},UPT_DAT=#{upt_dat,jdbcType=DATE},
+         UPT_TLR=#{upt_tlr,jdbcType=VARCHAR},REC_STS=#{rec_sts,jdbcType=VARCHAR}
+         where CUR_CDE=#{cur_cde,jdbcType=VARCHAR}
+    </update>
+       
+    <insert id="insertPifccy" parameterType="Pifccy">
+        insert into PIFCCY(CUR_CDE,CUR_NMC,CUR_NME,CNT_NAM,DOM_CDE,INT_CUR,DEC_POS,
+                           CCY_KND,CLR_FLG,TTC_FLG,CSH_FLG,CNT_FLG,RND_FLG,EXC_FLG,
+                           CUR_UNT,PRC_FLG,EXC_UNT,INT_PER,HOL_FLG,CUR_STS,EFF_DAT,
+                           EXP_DAT,SPE_FLG,UPT_DAT,UPT_TLR,REC_STS
+        ) values (#{cur_cde,jdbcType=VARCHAR},#{cur_nmc,jdbcType=VARCHAR},#{cur_nme,jdbcType=VARCHAR},
+        #{cnt_nam,jdbcType=VARCHAR},#{dom_cde,jdbcType=VARCHAR},#{int_cur,jdbcType=VARCHAR},
+        #{dec_pos,jdbcType=NUMERIC},#{ccy_knd,jdbcType= CHAR},#{clr_flg,jdbcType= CHAR},
+        #{ttc_flg,jdbcType= CHAR},#{csh_flg,jdbcType= CHAR},#{cnt_flg,jdbcType= CHAR},
+        #{rnd_flg,jdbcType= CHAR},#{exc_flg,jdbcType= CHAR},#{cur_unt,jdbcType=DECIMAL},#{prc_flg,jdbcType= CHAR},
+        #{exc_unt,jdbcType= NUMERIC},#{int_per,jdbcType=NUMERIC},#{hol_flg,jdbcType= CHAR},
+        #{cur_sts,jdbcType= CHAR},#{eff_dat,jdbcType=DATE},#{exp_dat,jdbcType=DATE},
+        #{spe_flg,jdbcType=VARCHAR},#{upt_dat,jdbcType=DATE},#{upt_tlr,jdbcType=VARCHAR},
+        #{rec_sts,jdbcType=VARCHAR})
+    </insert>
+
+</mapper>

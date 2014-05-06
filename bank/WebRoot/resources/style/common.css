@@ -1,0 +1,136 @@
+/**
+* 本系统下所有的自定义全局CSS 放这里
+*
+*/
+
+
+/*
+注册表单样式
+*/
+.form-register {
+    max-width: 1000px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+.error{
+    color: red;
+}
+
+
+/*
+* 评论部分样式
+*/
+.comment-meta{
+    position: relative;
+    margin: 0 0 20px;
+}
+.comment-meta-left img{
+    float: left;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    background: #fff;
+    width: 37px;
+    height: 37px;
+    padding: 2px;
+    display: inline;
+    margin: 0 10px 0 0;
+}
+.comment-reply a, .comment-reply a:visited {
+    border-right: 1px solid #666;
+    padding: 0 10px 0 0;
+    margin: 0 6px 0 0;
+}
+
+.comment-name-date{
+    list-style-type: none;
+}
+.comment-act{
+    list-style-type: none;
+    background: url(../imgs/arrow1.gif) no-repeat left;
+    font-size: 11px;
+    position: absolute;
+    right: 0px;
+    top: 7px;
+    padding: 0 0 0 10px;
+}
+.comment-act li{
+    display: inline-block;
+}
+.comment-act a {
+    color: #888;
+    text-decoration: underline;
+}
+
+.comment-content{
+    margin: 0 0 20px;
+}
+.comment-cancel{
+    margin: 0 6px 10px 0;
+    display: none;
+}
+
+
+.comment-cancel a{
+    color: #888;
+    text-decoration: underline;
+    padding: 8px;
+    background: url(../imgs/arrow1.gif) no-repeat left;
+}
+
+
+/*
+自定义栅格间隔
+*/
+/*
+.col-xs-1,
+.col-sm-1,
+.col-md-1,
+.col-lg-1,
+.col-xs-2,
+.col-sm-2,
+.col-md-2,
+.col-lg-2,
+.col-xs-3,
+.col-sm-3,
+.col-md-3,
+.col-lg-3,
+.col-xs-4,
+.col-sm-4,
+.col-md-4,
+.col-lg-4,
+.col-xs-5,
+.col-sm-5,
+.col-md-5,
+.col-lg-5,
+.col-xs-6,
+.col-sm-6,
+.col-md-6,
+.col-lg-6,
+.col-xs-7,
+.col-sm-7,
+.col-md-7,
+.col-lg-7,
+.col-xs-8,
+.col-sm-8,
+.col-md-8,
+.col-lg-8,
+.col-xs-9,
+.col-sm-9,
+.col-md-9,
+.col-lg-9,
+.col-xs-10,
+.col-sm-10,
+.col-md-10,
+.col-lg-10,
+.col-xs-11,
+.col-sm-11,
+.col-md-11,
+.col-lg-11,
+.col-xs-12,
+.col-sm-12,
+.col-md-12,
+.col-lg-12 {
+    padding-right: 5px;
+    padding-left: 5px;
+}*/

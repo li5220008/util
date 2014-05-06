@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!--
+  主要是配置实体类映射文件中的别名，其他内容都交给spring管理
+ -->
+<configuration>
+ <typeAliases> 
+        <typeAlias alias="User" type="com.gtafe.model.User"/> 
+        <typeAlias alias="Pifccy" type="com.gtafe.model.Pifccy"/> 
+        <typeAlias alias="Pifitm" type="com.gtafe.model.Pifitm"/>
+        <typeAlias alias="FeeRate" type="com.gtafe.model.Piffrt"/>
+        
+        <typeAlias alias="ExchangeRate" type="com.gtafe.model.ExchangeRate"/> 
+        <typeAlias alias="Pifbus" type="com.gtafe.model.Pifbus"/>
+        <typeAlias alias="Pifirt" type="com.gtafe.model.Pifirt"/>
+
+ </typeAliases>  
+</configuration>

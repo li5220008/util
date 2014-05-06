@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.gtafe.dao.UserMapper">
+
+    <select id="selectUserByID" parameterType="int" resultType="User">
+        select * from tb_user where id = #{id}
+    </select>
+    
+    <select id="login" parameterType="Map" resultType="User">
+        select * from tb_user where username = #{username} and password=#{password}
+    </select>
+    <!-- 为了返回list 类型而定义的returnMap -->
+    <resultMap type="User" id="resultListUser">
+        <id column="id" property="id" />
+        <result column="username" property="username" />
+        <result column="userAge" property="userAge" />
+        <result column="userAddress" property="userAddress" />
+    </resultMap>  
+    <!-- 返回list 的select 语句，注意 resultMap 的值是指向前面定义好的 -->
+    <select id="selectUsers" parameterType="string" resultMap="resultListUser">
+        select * from tb_user where username like #{userName}
+    </select>
+    
+    <select id="findAllUser"  resultMap="resultListUser">
+        select * from tb_user
+    </select>
+    <!--执行增加操作的SQL语句。id和parameterType分别与IUserOperation接口中的addUser方法的名字和  
+       参数类型一致。以#{name}的形式引用User参数 的name属性，MyBatis将使用反射读取User参数  
+        的此属性。#{name}中name大小写敏感。引用其他  
+       的gender等属性与此一致。seGeneratedKeys设置  
+       为"true"表明要MyBatis获取由数据库自动生成的主  
+       键；keyProperty="id"指定把获取到的主键值注入  
+       到Student的id属性?charset=cp936
+               useGeneratedKeys="true" keyProperty="uid"
+       --> 
+    <insert id="addUser" parameterType="User"> 
+        insert into tb_user(username,password,userAge,userAddress)  
+             values(#{username},#{password},#{userAge},#{userAddress})  
+    </insert>
+    
+    <update id="updateUser" parameterType="User" >
+        update tb_user set username=#{username},userAge=#{userAge},userAddress=#{userAddress} where id=#{id}
+    </update>
+    
+    <delete id="deleteUser" parameterType="int">
+        delete from tb_user where id=#{id}
+    </delete>
+    
+    <delete id="delUserBatch" parameterType="String">
+         delete from tb_user where id in 
+         <foreach collection="array" item="item" index="index" open="(" separator="," close=")">
+             #{item}
+         </foreach>
+    </delete>
+    
+    
+   <!-- jdbcType=VARCHER,   首先要看数据库支持怎么的批量插曲sql语句，然后拼接sql -->
+	<insert id="insertUserBatch" parameterType="List"> 	    
+	     <foreach collection="list" item="item" index="index"  separator="" >
+	     insert into tb_user(username,password,userAge,userAddress)
+	      values
+          (#{item.username},#{item.password},#{item.userAge},#{item.userAddress})
+         </foreach>  
+	</insert>
+</mapper>
