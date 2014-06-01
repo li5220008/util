@@ -1,7 +1,8 @@
 
-sybase
+### sybase
 
+isql -U aaa -P aaa -H 192.168.100.54:4205 -D staticdb -S bjtxsyb
 
-linux
+### linux
 
 netstat -tlnp
