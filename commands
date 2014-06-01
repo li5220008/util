@@ -1,7 +1,12 @@
 
 ### sybase
 
+
+#登陆数据库
 isql -U aaa -P aaa -H 192.168.100.54:4205 -D staticdb -S bjtxsyb
+
+#打开GUI配置窗口
+asecfg
 
 ### linux
 
