@@ -22,3 +22,6 @@ export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 fcitx &
 fcitx-qimpanel &
+
+#fedora logout
+>sudo pkill -kill -t tty1 
