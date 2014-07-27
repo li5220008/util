@@ -1,0 +1,64 @@
+说说在Fedora 18 下 搜狗输入法的安装过程。
+
+首先deepin的搜狗输入法 基于fcitx的框架 因此我们在安装搜狗之前需要先安装fcitx
+
+
+首先，先删除之前的ibus相关程序：
+
+sudo yum remove imsettings imsettings-libs im-chooser
+
+其次，yum install fcitx
+
+之后，修改环境变量：
+
+ vi ~/.bashrc
+增加如下内容：
+export GTK_IM_MODULE=xim
+export XMODIFIERS="@im=fcitx"
+export QT_IM_MODULE=xim
+保存后退出。
+
+
+接着，设置开机自动启动，打开终端，输入gnome-session-properties,在打开的图形界面中添加一条，名称和命令分别为fcitx fcitx就可以了。
+
+最后，注销，登录就可以使用fcitx了。
+
+接下来从deepin的搜狐源中下载搜狗拼音的deb包
+http://mirror.sohu.com/deepin/pool/non-free/f/fcitx-sogoupinyin-release/
+32位系统用i386.ideb，64位用amd64.deb
+另外从
+http://mirror.sohu.com/deepin/pool/main/f/fcitx-skins/
+下载皮肤
+
+下面以64位Fedora系统为例简单的说说安装过程。
+其实很简单就是解开包就可以用。
+
+详情如下：
+
+
+双击.amd64.deb包看到里面有一个data.tar.xz将它提取出来，放在任意一个文件夹下，比如/home/用户名，然后进入这个文件夹。键入命令行：
+sudo tar Jxvf data.tar.xz -C /
+将这个包解压到根目录下，接下来
+sudo mv /usr/lib/x86_64-linux-gnu/fcitx/fcitx-sogoupinyin.so /usr/lib64/fcitx/
+将搜狗拼音插件移动到fedora发行版中的相应位置。此时搜狗拼音应该已经可以用了。
+
+再用同样的方法 提取出搜狗皮肤的数据包。
+然后
+sudo tar zxvf data.tar.gz -C /
+就可以使用默认的搜狗皮肤了
+
+最后安装其他皮肤
+
+下载地址：
+
+免费下载地址在 http://linux.linuxidc.com/
+
+用户名与密码都是www.linuxidc.com
+
+具体下载目录在 /2013年资料/5月/22日/Fedora 18 下 搜狗输入法的安装
+
+或者
+
+百度云盘下载 http://pan.baidu.com/share/link?shareid=576111&uk=487907638
+
+解开包后有自动安装脚本，根用户权限运行之即可。
