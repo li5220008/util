@@ -1,3 +1,45 @@
+原文摘自： http://www.hiadmin.org/linux/fedora19-fcitx
+
+Fedora 19安装Fcitx输入法并安装搜狗输入法资源包
+发表回复	
+
+个人使用Ubuntu已经很多年了、但是只从ubuntu的界面换了之后我就一直没升级、最近新弄一块SSD硬盘、于是乎就想着安装个Fedora版本来玩玩、下载了最新版本的Fedora19。用U盘做好启动盘并安装到硬盘上之后发现系统自带的Ibus输入法非常的不好用、在Sublime Text下中文根本不能输入、于是想着换成Fcitx。
+1、先卸载系统自带的Ibus输入法
+
+sudo yum remove ibus  
+gsettings set org.gnome.settings-daemon.plugins.keyboard active false
+
+2、安装Fcitx输入法
+
+sudo yum install fcitx*
+
+3、配置一下Fcitx、在~/.bashrc中添加:如下内容
+
+    export GTK_IM_MODULE=fcitx  
+    export QT_IM_MODULE=fcitx  
+    export XMODIFIERS="@im=fcitx"
+
+4、由于Fedora 19中取消了注销按钮、就重启下机器吧 上面步骤完成之后其实就可以使用Fcitx输入法、不过看到搜狗输入法都已经出deb包了(sogou居然没有rpm包) 所以就想着安装个搜狗输入法到Fcitx上去。 从下面的连接地址下载对应的deb包、32位系统用i386.deb、64位系统用amd64.deb
+
+ http://mirrors.sohu.com/deepin/pool/non-free/f/fcitx-sogoupinyin-release/
+
+随便在从如下地址下载一个搜狗输入法的皮肤
+
+http://mirrors.sohu.com/deepin/pool/main/f/fcitx-skins/
+
+5、下载完成之后双击打开amd64.deb、蒋里面的data.tar.bz提取出来、然后到解压压缩文件
+
+sudo tar Jxvf data.tar.xz -C /
+
+接着我们把解压出来的.so文件移动到Fcitx的指定目录即可(64位为例)
+
+sudo mv fcitx-sogoupinyin.so /usr/lib64/fcitx/
+
+然后我们在安装皮肤.
+
+
+##################################################################################################################################
+
 说说在Fedora 18 下 搜狗输入法的安装过程。
 
 首先deepin的搜狗输入法 基于fcitx的框架 因此我们在安装搜狗之前需要先安装fcitx
