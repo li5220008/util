@@ -26,4 +26,4 @@ fcitx-qimpanel &
 #fedora logout
 >sudo pkill -kill -t tty1 
 
->sudo tar Jxvf data.tar.xz -C /
+>sudo tar zxvf data.tar.xz -C /
