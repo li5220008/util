@@ -27,3 +27,7 @@ fcitx-qimpanel &
 >sudo pkill -kill -t tty1 
 
 >sudo tar zxvf data.tar.xz -C /
+
+
+############dos#######################
+netstat  -aon|findstr  "8080"
