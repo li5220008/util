@@ -28,6 +28,10 @@ fcitx-qimpanel &
 
 >sudo tar zxvf data.tar.xz -C /
 
+#############修改 sybase 存储过程的transaction mode#########
+sp_procxmode procedure_name, "Unchained"
+sp_procxmode procedure_name, "anymode"
+
 
 ############dos#######################
 netstat  -aon|findstr  "8080"
