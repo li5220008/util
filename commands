@@ -8,9 +8,24 @@ isql -U aaa -P aaa -H 192.168.100.54:4205 -D staticdb -S bjtxsyb
 #打开GUI配置窗口
 asecfg
 
-### linux
+########################## linux ########################################
 
 netstat -tlnp
+
+### 查看文件命令
+# ls -l
+total 30372
+-rw-r--r-- 1 root root 31051909 May 24 10:07 cuss.war
+-rw------- 1 root root 0 Mar 20 13:52 nohup.out
+# ls -lh
+total 30M
+-rw-r--r-- 1 root root 30M May 24 10:07 cuss.war
+-rw------- 1 root root 0 Mar 20 13:52 nohup.out
+# ll -h
+total 30M
+-rw-r--r-- 1 root root 30M May 24 10:07 cuss.war
+-rw------- 1 root root 0 Mar 20 13:52 nohup.out
+[root@localhost rice_f2]# ls -lhs
 
 
 ## fcitx -r enable fcitx-qimpanel &
