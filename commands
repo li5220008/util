@@ -1,5 +1,5 @@
 
-### sybase
+############################ sybase #####################################
 
 
 #登陆数据库
@@ -7,6 +7,12 @@ isql -U aaa -P aaa -H 192.168.100.54:4205 -D staticdb -S bjtxsyb
 
 #打开GUI配置窗口
 asecfg
+
+#############修改 sybase 存储过程的transaction mode
+sp_procxmode procedure_name, "Unchained"
+sp_procxmode procedure_name, "anymode"
+
+
 
 ########################## linux ########################################
 
@@ -43,21 +49,7 @@ fcitx-qimpanel &
 
 >sudo tar zxvf data.tar.xz -C /
 
-#############修改 sybase 存储过程的transaction mode#########
-sp_procxmode procedure_name, "Unchained"
-sp_procxmode procedure_name, "anymode"
-
-
-############dos#######################
-netstat  -aon|findstr  "8080"
-
-sudo yum-config-manager --add-repo=http://repos.fedorapeople.org/repos/spot/chromium-stable/fedora-chromium-stable.repo
-
-sudo yum install chromium -y
-
-sudo yum-config-manager --add-repo=http://repos.fedorapeople.org/repos/spot/chromium-unstable/fedora-chromium.repo
-
-##############chrome################
+############## chrome
 cat << EOF > /etc/yum.repos.d/google-chrome.repo
 [google-chrome]
 name=google-chrome - \$basearch
@@ -68,4 +60,21 @@ gpgkey=https://dl-ssl.google.com/linux/linux_signing_key.pub
 EOF
 
 yum install google-chrome-stable
+
+
+sudo yum-config-manager --add-repo=http://repos.fedorapeople.org/repos/spot/chromium-stable/fedora-chromium-stable.repo
+
+sudo yum install chromium -y
+
+sudo yum-config-manager --add-repo=http://repos.fedorapeople.org/repos/spot/chromium-unstable/fedora-chromium.repo
+
+
+
+######################### windows #######################
+############ dos 查看端口占情况
+netstat  -aon|findstr  "8080"
+
+
+
+
 
