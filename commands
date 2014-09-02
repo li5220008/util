@@ -12,6 +12,40 @@ asecfg
 sp_procxmode procedure_name, "Unchained"
 sp_procxmode procedure_name, "anymode"
 
+## sybase 新建数据库
+
+[sybase]$ isql -Usa  
+Password: <sa-password>  
+1> disk init name='jbpmdata', physname='/var/lib/sybase/jbpmdata.dat', size='32m'  
+2> go  
+1> disk init name='jbpmlog', physname='/var/lib/sybase/jbpmlog.dat', size='32m'  
+2> go  
+1> create database jbpm3 on jbpmdata='32m' log on jbpmlog='32m'  
+2> go  
+1> sp_dboption jbpm3, "trunc log on chkpt", true  
+2> go  
+1> sp_dboption jbpm3, "abort tran on log full", true  
+2> go  
+
+## sybase 备份数据库
+     use master
+      
+     go
+     
+     dump database bank to 'd:\mysybase.dump"' 
+     
+     go
+     
+     load database bank from "d:\mysybase.dump"
+     
+     go
+     
+     online database bank
+     
+     go
+     
+     select * from PIFTRX
+
 
 
 ########################## linux ########################################
