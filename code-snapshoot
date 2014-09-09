@@ -1,0 +1,46 @@
+
+
+
+//授权验证
+        $.ajax( {
+            type : "POST",
+            url : "${pageContext.request.contextPath}/companyCustomer/checkAuthorize",
+            data : {"name":name,"pwd":pwd},
+            dataType:"json",
+            success : function(validated) {
+                if(validated){
+                    /*validateForm.submit();
+                    diag.close();*/
+                    var form_val = {"cus_typ": "00","pas_tpy": "01","pas_num": "1","pas_dpm": "1","pas_sdt": "2014-09-10","chn_nam": "1"};
+                    console.log(form_val);
+                    $.ajax({
+                        url:validateForm.attr('action'),
+                        type:"post",
+                        dataType:"json",
+                        data:JSON.stringify(form_val),
+                        contentType:"application/json",
+                        success: function(data){
+                            diag.close();
+                            diag.URL = "${pageContext.request.contextPath}/companyCustomer/generatePrint?data="+encodeURI(JSON.stringify(data));
+                            diag.show();
+                            clickMe("","${pageContext.request.contextPath}/companyCustomer/generate");
+                        },
+                        error:function(XMLHttpRequest){
+                            top.Dialog.alert("内部服务器"+XMLHttpRequest.status+"错误！");
+                        }
+                    });
+                }else{
+                    top.Dialog.alert("授权帐号或密码错误！");
+                    $("#pwd").val("");
+                }
+            }
+        });
+
+
+@RequestMapping(value = "/generateDo",method = RequestMethod.POST)
+    public @ResponseBody Boolean generateDo(@RequestBody CompanyCustomerOpenDto dto, Model model) {
+        service.generate(dto);
+        /*Message message = new Message(msg,"/companyCustomer/generate",3);
+        return CommonUtils.message(model, message);*/
+        return true;
+    }
