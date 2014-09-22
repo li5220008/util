@@ -27,16 +27,38 @@ Password: <sa-password>
 1> sp_dboption jbpm3, "abort tran on log full", true  
 2> go  
 
+
+## sybase 创建数据库	 	
+
+     use master
+	drop database bank
+	go
+	sp_dropdevice bank
+	go
+	sp_dropdevice banklog
+	go
+	disk init name='bank', physname='D:\sybase_devices\bank.dat', size='500m'  
+	go  
+	disk init name='banklog', physname='D:\sybase_devices\banklog.dat', size='500m'  
+	go  
+	create database bank on bank='500m' log on banklog='500m'  
+	go  
+	sp_dboption bank, "trunc log on chkpt", true  
+	go  
+	sp_dboption bank, "abort tran on log full", true  
+	go  	
+
+
 ## sybase 备份数据库
      use master
       
      go
      
-     dump database bank to 'd:\mysybase.dump"' 
+     dump database bank to 'C:\sybasebak\20140903.dump'  
      
      go
      
-     load database bank from "d:\mysybase.dump"
+     load database bank from 'C:\sybasebak\20140903.dump'
      
      go
      
@@ -44,7 +66,29 @@ Password: <sa-password>
      
      go
      
-     select * from PIFTRX
+     sp_help
+
+
+##修改数据库设备大小
+use master
+    go
+    disk resize
+    name = 'bank',
+    size = '30m'
+    go
+    sp_helpdevice bank
+
+
+ddlgen的其他用法:
+1、存储过程
+ddlgen -Usa -P666666 -SGTA101134 -Dbank -TP -N% -O C:\sybasebak\db\proc.ddl -Jutf8
+2、数据库
+ddlgen -Usa -P666666 -SGTA101134 -Dbank -TDB -Nbank -O C:\sybasebak\db\db.ddl -Jutf8
+3、表结构
+ddlgen -Usa -P666666 -SGTA101134 -Dbank -TU -N% -O C:\sybasebak\db\table.ddl -Jutf8
+4、视图
+ddlgen -Usa -P666666 -SGTA101134 -Dbank -TV -N% -O C:\sybasebak\db\view.ddl -Jutf8
+
 
 
 
