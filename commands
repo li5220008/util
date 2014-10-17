@@ -146,6 +146,20 @@ sudo yum install chromium -y
 
 sudo yum-config-manager --add-repo=http://repos.fedorapeople.org/repos/spot/chromium-unstable/fedora-chromium.repo
 
+############## Creating a Swap File
+To add a swap file:
+Determine the size of the new swap file in megabytes and multiply by 1024 to determine the number of blocks. For example, the block size of a 64 MB swap file is 65536.
+At a shell prompt as root, type the following command with count being equal to the desired block size:
+dd if=/dev/zero of=/swapfile bs=1024 count=65536
+Setup the swap file with the command:
+mkswap /swapfile
+To enable the swap file immediately but not automatically at boot time:
+swapon /swapfile
+To enable it at boot time, edit /etc/fstab to include the following entry:
+/swapfile swap swap defaults 0 0
+The next time the system boots, it enables the new swap file.
+To test if the new swap file was successfully created, use cat /proc/swaps or free to inspect the swap space.
+
 
 
 ######################### windows #######################
