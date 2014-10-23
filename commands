@@ -127,6 +127,14 @@ fcitx-qimpanel &
 
 >sudo tar zxvf data.tar.xz -C /
 
+####clear tmp
+
+tmpwatch -afq --mtime 1 /tmp
+
+## report file system disk space usage
+
+df -h
+
 ############## chrome
 cat << EOF > /etc/yum.repos.d/google-chrome.repo
 [google-chrome]
