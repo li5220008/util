@@ -62,7 +62,108 @@ Quota 50M on users
 	alter User 用户名 Password Expire
 
 	/dos下写出到文本文件
-	d
+	eq
+	
+//操作表空间
+一、drop user xxxx cascade;
+二、drop tablespace xxxx including contents and datafiles
+1.首先看一下是不是已经使用了OMF
+sql>show parameter db_create
+查看参数db_create_file_dest,如果已经设置
+则:drop tablespace tablespacename 就可以直接删除表空间以及相应的数据文件
+2.如果没使用OMF,则：
+drop tablespace tablespacename including contents and datafiles
+
+1、先查询空闲空间
+
+select tablespace_name,file_id,block_id,bytes,blocks from dba_free_space; 
+2、增加Oracle表空间
+
+先查询数据文件名称、大小和路径的信息，语句如下：
+
+select tablespace_name,file_id,bytes,file_name from dba_data_files; 
+3、修改文件大小语句如下
+
+alter database datafile   
+'需要增加的数据文件路径，即上面查询出来的路径  
+'resize 800M; 
+4、创建Oracle表空间
+
+create tablespace test  
+datafile '/home/app/oracle/oradata/oracle8i/test01.dbf' size 8M  
+autoextend on  
+next 5M  
+maxsize 10M;  
+ 
+create tablespace sales  
+datafile '/home/app/oracle/oradata/oracle8i/sales01.dbf' size 800M  
+autoextend on  
+next 50M  
+maxsize unlimited  
+maxsize unlimited 是大小不受限制  
+ 
+create tablespace sales  
+datafile '/home/app/oracle/oradata/oracle8i/sales01.dbf' size 800M  
+autoextend on  
+next 50M  
+maxsize 1000M  
+extent management local uniform;  
+unform表示区的大小相同，默认为1M  
+ 
+create tablespace sales  
+datafile '/home/app/oracle/oradata/oracle8i/sales01.dbf' size 800M  
+autoextend on  
+next 50M  
+maxsize 1000M  
+extent management local uniform size 500K;  
+unform size 500K表示区的大小相同，为500K  
+ 
+create tablespace sales  
+datafile '/home/app/oracle/oradata/oracle8i/sales01.dbf' size 800M  
+autoextend on  
+next 50M  
+maxsize 1000M  
+extent management local autoallocate;  
+autoallocate表示区的大小由随表的大小自动动态改变，大表使用大区小表使用小区  
+ 
+create tablespace sales  
+datafile '/home/app/oracle/oradata/oracle8i/sales01.dbf' size 800M  
+autoextend on  
+next 50M  
+maxsize 1000M  
+temporary;  
+temporary创建字典管理临时表空间  
+ 
+create temporary tablespace sales  
+tempfile '/home/app/oracle/oradata/oracle8i/sales01.dbf' size 800M  
+autoextend on  
+next 50M  
+maxsize 1000M  
+创建本地管理临时表空间，如果是临时表空间，所有语句中的datafile都换为tempfile  
+ 
+8i系统默认创建字典管理临时表空间，要创建本地管理临时表空间要加temporary tablespace关键字  
+创建本地管理临时表空间时，不得使用atuoallocate参数，系统默认创建uniform管理方式  
+ 
+为表空间增加数据文件：  
+alter tablespace sales add  
+datafile '/home/app/oracle/oradata/oracle8i/sales02.dbf' size 800M  
+autoextend on next 50M  
+maxsize 1000M; 
+创建本地管理临时Oracle表空间，如果是临时表空间，所有语句中的datafile都换为tempfile8i系统默认创建字典管理临时表空间，要创建本地管理临时表空间要加temporary tablespace关键字创建本地管理临时表空间时，不得使用atuoallocate参数，系统默认创建uniform管理方式
+
+为表空间增加数据文件：
+
+alter tablespace sales add  
+datafile '/home/app/oracle/oradata/oracle8i/sales02.dbf' size 800M  
+autoextend on next 50M  
+maxsize 1000M; 
+5、更改自动扩展属性：
+
+alter database datafile  
+'/home/app/oracle/oradata/oracle8i/sales01.dbf',  
+'/home/app/oracle/oradata/oracle8i/sales02.dbf'  
+'/home/app/oracle/oradata/oracle8i/sales01.dbf  
+autoextend off; 
 	
 	
 //三个默认的用户
