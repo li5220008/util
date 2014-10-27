@@ -3,6 +3,7 @@
 ########################### Fedora release 19 
 
 ########################## windows 
+
 //杂项命令
 	disconn
 	conn bank/bank
@@ -60,8 +61,8 @@ Quota 50M on users
 	用户口令即刻失效
 	alter User 用户名 Password Expire
 
-//dos下写出到文本文件
-ed
+	/dos下写出到文本文件
+	d
 	
 	
 //三个默认的用户
