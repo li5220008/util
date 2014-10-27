@@ -1,6 +1,130 @@
 ############################ oracle #####################################
 
-Fedora release 19 
+########################### Fedora release 19 
+
+########################## windows 
+//杂项命令
+	disconn
+	conn bank/bank
+	set linesize 300	
+//监听配置文件路径：
+C:\app\Administrator\product\11.2.0\dbhome_1\NETWORK\ADMIN
+//用户管理
+	//oracle数据库的三种验证机制
+	1、操作系统验证
+	2、密码文件验证
+	3、数据库验证
+
+//linux下oracle启动过程
+	lsnrctl start//启动监听
+	/11g+
+	sqlplus sys/666666 as sysdba (1、2)//早起的版本不支持
+	/早期版本
+	sqlplus /nolog
+	conn sys/666666 as sysdba
+	startup //启动oracle实例
+	/普通用户登录
+	sqlplus scott/tiger
+//windows下oracle启动过程
+	lsnrctl start
+	oradim -starup -sid orcl
+	
+
+
+	//超级用户登陆
+	sqlplus / as sysdba
+	
+	//修改用户密码(会覆盖原来的密码)
+	alter user scott identified by tiger
+	//更改超级管理员（特权 sysdba,sysoper）用户口令文件
+	orapwd file=C:\app\Administrator\product\11.2.0\dbhome_1\database\PWDorcl.ora password=666666 entries=10
+	//查看密码文件里面放了多少特权用户
+	select * from v$pwfile_users;
+
+//创建用户
+create user banks
+identified by banks
+default tablespace Users 
+Temporary Tablespace Temp
+Quota 50M on users //(Quota unlimited on users)限制用户表空间的大小
+
+
+alter user banks
+identified by banks
+default tablespace Users 
+Temporary Tablespace Temp
+Quota 50M on users
+
+	//用户加锁 alter User 用户名 Account Lock
+	//用户解锁 alter User 用户名 Account Unlock
+	用户口令即刻失效
+	alter User 用户名 Password Expire
+
+//dos下写出到文本文件
+ed
+	
+	
+//三个默认的用户
+
+	sys change_oninstall [as sysdba]
+	system manager
+	scott tiger
+
+//创建用户
+	create user bank identified by 666666;
+//系统权限
+	//赋予创建session回话权限 （登陆）
+	grant create session to bank;
+	//建表权限(包括增删改查/ 对于对象权限，谁拥有谁授权)
+	grant create table to bank;
+	//授予表空间的权限
+	grant unlimited tablespase to bank;
+
+	//撤销权限
+	revoke create session from bank;
+	revoke create table from bank;
+	revoke unlimited tablespase from bank;
+
+//对象权限
+	//赋予对象权限
+	grant select on mytab to bank;
+	grant all on mytab to bank;
+	//撤销权限
+	revoke select on mytab from bank;
+	revoke all on mytab from bank;
+	//可以控制到列
+	grant update(name) on mytab to list;
+	grant insert(id) on mytab to list; 
+	注意查询和删除不能控制到列
+	//查询列权限
+	select * from user_col_privs;
+	
+//查看用户下面拥有哪些系统权限、
+	select * from user_sys_privs;	
+
+//查看用户下面拥有哪些对象权限、
+	select * from user_tab_privs;
+
+//授予public权限
+	grant create any table to public;
+
+ddl 数据定义语言
+dml 数据操作语言 //需要commit
+dcl 数据授权
+
+权限具有传递性
+	grant alter any table to lisi with admin;
+	grant alter any table to lisi with grant;
+角色权限
+	//创建
+	create role myrole;
+	//授权
+	grant create session to myrole;
+	grant create table to myrole;
+	//把角色授权给用户
+	gtant myrole to bank;
+
+
 
 
 ############################ sybase #####################################
