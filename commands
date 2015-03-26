@@ -1,5 +1,10 @@
 ############################ oracle #####################################
 
+http://www.oracle.com/technetwork/database/enterprise-edition/downloads/index.html
+li5220008@163.com
+Li*************
+
+
 1、create tablespace banks datafile 'D:\oracle\datafile\BANKS.DBF' size 500M autoextend on;
 2、create user banks identified by 666666 default tablespace banks;
 3、grant connect,resource to banks;
