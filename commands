@@ -5,7 +5,7 @@ li5220008@163.com
 Li*************
 
 https://m.gtafe.com
-
+http://gdufs.gzedu.com
 
 1、create tablespace banks datafile 'D:\oracle\datafile\BANKS.DBF' size 500M autoextend on;
 2、create user banks identified by 666666 default tablespace banks;
