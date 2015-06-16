@@ -2,11 +2,19 @@
 
 ##oracle##批量插入sql
 
-INSERT INTO tbl_name (a,b,c)
-select 1 as a, 2 as b, 3 as c from dual union all 
-select 4, 5, 6 from dual union all 
-select 7, 8, 9 from dual union all 
-……
+INSERT ALL
+    INTO tablea (id,b,c) VALUES (tablea_seq.nextval,1,2)
+    INTO tablea (id,b,c) VALUES (tablea_seq.nextval,3,4)
+    INTO tablea (id,b,c) VALUES (tablea_seq.nextval,5,6)
+SELECT 1 FROM dual;
+
+insert into tablea (id,b,c)
+ ( select tablea_seq.nextval,1,2 from dual union all
+   select tablea_seq.nextval,3,4 from dual union all
+   select tablea_seq.nextval,3,4 from dual union all
+   select tablea_seq.nextval,3,4 from dual union all
+   ...
+ )
 
 记得mysql 批量插入数据
 INSERT INTO tbl_name (a,b,c) VALUES(1,2,3),(4,5,6),(7,8,9),……;
