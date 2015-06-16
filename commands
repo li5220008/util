@@ -1,5 +1,16 @@
 ############################ oracle #####################################
 
+##oracle##批量插入sql
+
+INSERT INTO tbl_name (a,b,c)
+select 1 as a, 2 as b, 3 as c from dual union all 
+select 4, 5, 6 from dual union all 
+select 7, 8, 9 from dual union all 
+……
+
+记得mysql 批量插入数据
+INSERT INTO tbl_name (a,b,c) VALUES(1,2,3),(4,5,6),(7,8,9),……;
+
 http://www.oracle.com/technetwork/database/enterprise-edition/downloads/index.html
 li5220008@163.com
 Li*************
