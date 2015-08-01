@@ -483,6 +483,8 @@ To test if the new swap file was successfully created, use cat /proc/swaps or fr
 ############ dos 查看端口占情况
 netstat  -aon|findstr  "8080"
 
+tskill ####
+
 
 ipconfig /all                ------ 查询本机IP段，所在域等 
 net user                     ------ 本机用户列表 
