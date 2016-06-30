@@ -23,3 +23,6 @@ http://gewifi.10000.gd.cn/portal/szba/pc/success.html
 
 20464101379
 613568657
+
+深圳住房公积金查询
+https://e.szsi.gov.cn/siservice/LoginAction.do
