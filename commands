@@ -636,5 +636,39 @@ wmic startup list full (this can be a huge list!!!)
 wmic /node:"hostname" bios get serialnumber (this can be great for finding warranty info about target)
 
 
+每天运行一次                        'SYSDATE + 1'
+每小时运行一次                     'SYSDATE + 1/24'
+每10分钟运行一次                 'SYSDATE + 10/（60*24）'
+每30秒运行一次                    'SYSDATE + 30/(60*24*60)'
+每隔一星期运行一次               'SYSDATE + 7'
+每个月最后一天运行一次         'TRUNC(LAST_DAY(ADD_MONTHS(SYSDATE,1))) + 23/24'
+每年1月1号零时                    'TRUNC(LAST_DAY(TO_DATE(EXTRACT(YEAR FROM SYSDATE)||'12'||'01','YYYY-MM-DD'))+1)' 
+每天午夜12点                       'TRUNC(SYSDATE + 1)'
+每天早上8点30分                  'TRUNC(SYSDATE + 1) + (8*60+30)/(24*60)'
+每星期二中午12点                 'NEXT_DAY(TRUNC(SYSDATE ), ''TUESDAY'' ) + 12/24'
+每个月第一天的午夜12点        'TRUNC(LAST_DAY(SYSDATE ) + 1)'
+每个月最后一天的23点           'TRUNC (LAST_DAY (SYSDATE)) + 23 / 24'
+每个季度最后一天的晚上11点  'TRUNC(ADD_MONTHS(SYSDATE + 2/24, 3 ), 'Q' ) -1/24'
+每星期六和日早上6点10分      'TRUNC(LEAST(NEXT_DAY(SYSDATE, ''SATURDAY"), NEXT_DAY(SYSDATE, "SUNDAY"))) + (6*60+10)/(24*60)'
 
+例：
+
+DECLARE
+   job             BINARY_INTEGER;                                                         --任务ID
+   v_begin      DATE;                                                                           --开始时间
+   v_interval   VARCHAR2 (50);                                                           --时间间隔
+BEGIN
+   v_begin    := TRUNC (LAST_DAY (SYSDATE)) + 23 / 24;                  --<当前月份最后一天 23:00>
+   v_interval := 'trunc(last_day(add_months(sysdate,1))) + 23/24'; --<下个月份最后一天 23:00>
+   DBMS_JOB.submit (job,
+                    'prc_ll_temp;',
+                    v_begin,
+                    v_interval,
+                    FALSE,
+                    0,
+                    FALSE
+                   );
+   DBMS_OUTPUT.put_line ('JOB(任务)编号：' || job);
+   COMMIT;
+END;
 
