@@ -51,11 +51,53 @@ insert into tablea (id,b,c)
  )
 
 //mysql 导出表结构和数据到文件
+
+https://dev.mysql.com/doc/refman/5.6/en/batch-mode.html
+
 drds_jdsc_bms <t.sql>./csv.sql
+
+mysqldump --default-character-set=utf8  -h10.3.157.193 -udrds_xncs_bms_ro -pDrds2017 --set-gtid-purged=OFF --skip-opt --databases drds_xncs_bms --tables t_bms_lt_scheduling  -tc --quick|sed '/\/\*.*\/;$/d'   >./drds_xncs_bms_tables_20171206_01.sql
+mysqldump --default-character-set=utf8  -h10.3.157.193 -udrds_xncs_bms_ro -pDrds2017 --set-gtid-purged=OFF --skip-opt --databases drds_xncs_bms --tables t_bms_lt_scheduling t_bms_lt_scheduling_person t_bms_lt_scheduling_detail -t |sed '\/\*.*\/;$/d'   >>./drds_xncs_bms_tables_20171206_01.sql
+
+5、数据导出
 
 mysqldump -h${DRDS_IP_ADDRESS} -P${DRDS_PORT} -u${user} -p${password} --set-gtid-purged=OFF --skip-opt --databases ${DRDS_DBNAME}  --tables ${TABLE_NAME}|sed ‘\/\*.*\/;$/d’  >${FILE_PATH}
 记得mysql 批量插入数据
+
+
+执行脚本：
+shell> mysql < batch-file
+If you are running mysql under Windows and have some special characters in the file that cause problems, you can do this:
+
+C:\> mysql -e "source batch-file"
+If you need to specify connection parameters on the command line, the command might look like this:
+
+
+shell> mysql -h host -u user -p < batch-file
+Enter password: ********
+
+shell> mysql < batch-file > mysql.out
+
+If you want to get the interactive output format in batch mode, use mysql -t. To echo to the output the statements that are executed, use mysql -v.
+
+You can also use scripts from the mysql prompt by using the source command or \. command:
+
+
+mysql> source filename;
+mysql> \. filename
+
+
+
+
+
+
+
+
+
+
 INSERT INTO tbl_name (a,b,c) VALUES(1,2,3),(4,5,6),(7,8,9),……;
+
+
 
 http://www.oracle.com/technetwork/database/enterprise-edition/downloads/index.html
 li5220008@163.com
@@ -71,7 +113,7 @@ http://gdufs.gzedu.com
 4、删除用户,包括旗下所有的设备
 drop user bank cascade;
 
-5、数据导出
+
  11G中有个新特性，当表无数据时，不分配segment，以节省空间
  //查询默认值True	
  show parameter deferred_segment_creation 
