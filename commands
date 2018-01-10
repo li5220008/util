@@ -602,6 +602,8 @@ To test if the new swap file was successfully created, use cat /proc/swaps or fr
 ############ dos 查看端口占情况
 netstat  -aon|findstr  "8080"
 
+tasklist | findstr “3500”
+
 tskill ####
 
 
