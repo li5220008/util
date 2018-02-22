@@ -56,13 +56,17 @@ https://dev.mysql.com/doc/refman/5.6/en/batch-mode.html
 
 drds_jdsc_bms <t.sql>./csv.sql
 
-mysqldump --default-character-set=utf8  -h10.3.157.193 -udrds_xncs_bms_ro -pDrds2017 --set-gtid-purged=OFF --skip-opt --databases drds_xncs_bms --tables t_bms_lt_scheduling  -tc --quick|sed '/\/\*.*\/;$/d'   >./drds_xncs_bms_tables_20171206_01.sql
-mysqldump --default-character-set=utf8  -h10.3.157.193 -udrds_xncs_bms_ro -pDrds2017 --set-gtid-purged=OFF --skip-opt --databases drds_xncs_bms --tables t_bms_lt_scheduling t_bms_lt_scheduling_person t_bms_lt_scheduling_detail -t |sed '\/\*.*\/;$/d'   >>./drds_xncs_bms_tables_20171206_01.sql
 
 5、数据导出
 
 mysqldump -h${DRDS_IP_ADDRESS} -P${DRDS_PORT} -u${user} -p${password} --set-gtid-purged=OFF --skip-opt --databases ${DRDS_DBNAME}  --tables ${TABLE_NAME}|sed ‘\/\*.*\/;$/d’  >${FILE_PATH}
 记得mysql 批量插入数据
+
+demo:
+-- mysqldump --default-character-set=utf8  -h10.3.135.5 -udrds_jdsc_bms_ro -pDrds2017 --set-gtid-purged=OFF --skip-opt --databases drds_jdsc_bms --tables t_bms_lt_scheduling --where="ORG_CODE = '31112105' AND SCHEDULING_BEGIN_TIME = '2018-02-12' AND SCHEDULING_END_TIME = '2018-02-18'" -tc --quick|sed '/\/\*.*\/;$/d'   >./drds_jdsc_bms_tables_20180222_01.sql
+-- mysqldump --default-character-set=utf8  -h10.3.135.5 -udrds_jdsc_bms_ro -pDrds2017 --set-gtid-purged=OFF --skip-opt --databases drds_jdsc_bms --tables t_bms_lt_scheduling_detail --where="ORG_CODE = '31112105' AND scheduling_id = '1517843'" -tc --quick|sed '/\/\*.*\/;$/d'   >./drds_jdsc_bms_tables_20180222_02.sql
+-- mysqldump --default-character-set=utf8  -h10.3.135.5 -udrds_jdsc_bms_ro -pDrds2017 --set-gtid-purged=OFF --skip-opt --databases drds_jdsc_bms --tables t_bms_lt_scheduling_person --where="ORG_CODE = '31112105' AND OFFICE_TIME >= '2018-02-12' AND OFFICE_TIME <= '2018-02-18'" -tc --quick|sed '/\/\*.*\/;$/d'   >./drds_jdsc_bms_tables_20180222_03.sql
+-- mysqldump --default-character-set=utf8  -h10.3.135.5 -udrds_jdsc_bms_ro -pDrds2017 --set-gtid-purged=OFF --skip-opt --databases drds_jdsc_bms --tables t_bms_lt_scheduling t_bms_lt_scheduling_person t_bms_lt_scheduling_detail -t |sed '\/\*.*\/;$/d'   >>./drds_jdsc_bms_tables_20171226.sql
 
 
 执行脚本：
