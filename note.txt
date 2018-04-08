@@ -34,6 +34,10 @@ https://e.szsi.gov.cn/siservice/LoginAction.do
 li5220008
 密码 8~12为 大写字母+小写字母+数字
 
+深圳社会统一用户基础平台
+https://suum.szsi.gov.cn/suum/goLoginNew.do
+同上
+
 
 PMP学习APP
 
