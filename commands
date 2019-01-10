@@ -621,6 +621,7 @@ netstat  -aon|findstr  "8080"
 tasklist | findstr “3500”
 
 tskill ####
+taskkill /pid 12380
 
 
 ipconfig /all                ------ 查询本机IP段，所在域等 
