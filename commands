@@ -618,10 +618,11 @@ To test if the new swap file was successfully created, use cat /proc/swaps or fr
 ############ dos 查看端口占情况
 netstat  -aon|findstr  "8080"
 
-tasklist | findstr “3500”
+tasklist | findstr “3728”
 
 tskill ####
-taskkill /pid 12380
+
+taskkill /f /pid 3728
 
 
 ipconfig /all                ------ 查询本机IP段，所在域等 
