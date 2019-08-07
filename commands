@@ -92,6 +92,16 @@ mysql> \. filename
 
 
 
+//给特定的IP用户授权
+
+mysql> show grants for 'gxwx'@'%';
+
+mysql> grant all on weixin3.* to 'gxwx'@'211.138.242.162' identified by "gxwx_sc0771";
+
+mysql> show grants for 'gxwx'@'211.138.242.162';
+
+
+
 
 
 ################自定义路由表，同时上内外网
